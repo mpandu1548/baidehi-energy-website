@@ -1,0 +1,653 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Baidehi Energy | Powering a Sustainable Future{% endblock %}
+
+{% block content %}
+
+<!-- =========================================
+     HERO
+========================================= -->
+
+<section class="hero-section">
+
+    <div class="hero-overlay">
+        
+    </div>
+
+    <div class="container">
+
+        <div class="hero-content">
+            <div class="hero-text">
+
+                <div class="hero-label">
+                    <i class="bi bi-sun-fill"></i>
+                    Renewable Energy • Nepal
+                </div>
+
+                <h1>
+                    Powering a
+                    <span>Sustainable Future</span>
+                </h1>
+
+                <p class="hero-description">
+                    Baidehi Energy is developing reliable and environmentally
+                    responsible solar power infrastructure to support Nepal's
+                    transition toward clean energy.
+                </p>
+
+                <div class="hero-highlights">
+
+                    <div>
+                        <strong>10 MW</strong>
+                        <span>Project Capacity</span>
+                    </div>
+
+                    <div>
+                        <strong>17.4M</strong>
+                        <span>kWh / Year</span>
+                    </div>
+
+                    <div>
+                        <strong>5.53</strong>
+                        <span>NRs / kWh</span>
+                    </div>
+
+                </div>
+
+                <div class="hero-buttons">
+
+                    <a href="{% url 'project' %}"
+                       class="btn btn-primary-custom">
+                        Explore Our Project
+                        <i class="bi bi-arrow-right ms-2"></i>
+                    </a>
+
+                    <a href="{% url 'about' %}"
+                       class="btn btn-outline-light-custom">
+                        About Baidehi
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="hero-scroll">
+        <i class="bi bi-chevron-down"></i>
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     STATS
+========================================= -->
+
+<section class="stats-section">
+
+    <div class="container">
+
+        <div class="stats-grid">
+
+            <div class="stat-item">
+                <div class="stat-number">10 MW</div>
+                <div class="stat-label">Solar Capacity</div>
+            </div>
+
+            <div class="stat-item">
+                <div class="stat-number">17.4M</div>
+                <div class="stat-label">kWh Annual Generation</div>
+            </div>
+
+            <div class="stat-item">
+                <div class="stat-number">5.53</div>
+                <div class="stat-label">NRs / kWh PPA Tariff</div>
+            </div>
+
+            <div class="stat-item">
+                <div class="stat-number">Nepal</div>
+                <div class="stat-label">Clean Energy</div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     ABOUT BAIDEHI
+========================================= -->
+
+<section class="home-about-section">
+
+    <div class="container">
+
+        <div class="row align-items-center g-5">
+
+            <div class="col-lg-6">
+
+                <div class="section-label">
+                    ABOUT BAIDEHI ENERGY
+                </div>
+
+                <h2 class="home-section-title">
+                    Building Nepal's
+                    <span>Clean Energy Future</span>
+                </h2>
+
+                <p>
+                    Baidehi Energy Pvt. Ltd. is a Nepal-based renewable energy
+                    company dedicated to developing sustainable, reliable and
+                    environmentally responsible solar power infrastructure.
+                </p>
+
+                <p>
+                    We are committed to accelerating Nepal's transition to
+                    clean energy by delivering high-quality utility-scale
+                    solar projects that strengthen national energy security,
+                    support economic growth and contribute to a low-carbon
+                    future.
+                </p>
+
+                <a href="{% url 'about' %}"
+                   class="btn btn-project">
+                    Discover More
+                    <i class="bi bi-arrow-right ms-2"></i>
+                </a>
+
+            </div>
+
+            <div class="col-lg-6">
+
+                <div class="home-about-image">
+
+                    <div class="image-placeholder-content">
+
+                        <i class="bi bi-sun"></i>
+
+                        <h4>Solar Energy</h4>
+
+                        <p>
+                            About/project image will be added here
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     WHY BAIDEHI
+========================================= -->
+
+<section class="why-section">
+
+    <div class="container">
+
+        <div class="section-heading-center">
+
+            <div class="section-label">
+                WHY BAIDEHI ENERGY
+            </div>
+
+            <h2>
+                Creating Value Through Clean Energy
+            </h2>
+
+            <p>
+                Our approach combines sustainable development, reliable
+                infrastructure and long-term value creation.
+            </p>
+
+        </div>
+
+
+        <div class="row g-4 mt-4">
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="why-card">
+
+                    <div class="why-icon">
+                        <i class="bi bi-sun-fill"></i>
+                    </div>
+
+                    <h4>Clean Energy</h4>
+
+                    <p>
+                        Generating renewable electricity from one of Nepal's
+                        most abundant natural resources.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="why-card">
+
+                    <div class="why-icon">
+                        <i class="bi bi-shield-check"></i>
+                    </div>
+
+                    <h4>Reliable Infrastructure</h4>
+
+                    <p>
+                        Developing dependable solar infrastructure designed
+                        for long-term operation and performance.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="why-card">
+
+                    <div class="why-icon">
+                        <i class="bi bi-lightning-charge"></i>
+                    </div>
+
+                    <h4>Grid Integration</h4>
+
+                    <p>
+                        Strategically located for efficient connection to
+                        Nepal's national electricity grid.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="why-card">
+
+                    <div class="why-icon">
+                        <i class="bi bi-leaf"></i>
+                    </div>
+
+                    <h4>Long-Term Impact</h4>
+
+                    <p>
+                        Supporting energy security, economic development and
+                        Nepal's low-carbon future.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     FLAGSHIP PROJECT
+========================================= -->
+
+<section class="flagship-project-section">
+
+    <div class="container">
+
+        <div class="row align-items-center g-5">
+
+            <div class="col-lg-6">
+
+                <div class="flagship-project-image">
+
+                    <div class="project-image-placeholder">
+
+                        <i class="bi bi-buildings"></i>
+
+                        <span>
+                            Project image will be added here
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-6">
+
+                <div class="section-label">
+                    FLAGSHIP DEVELOPMENT
+                </div>
+
+                <h2 class="flagship-title">
+                    Baidehi Solar PV Project
+                </h2>
+
+                <div class="project-capacity">
+                    10 MW <span>AC Grid-Connected Solar Power Plant</span>
+                </div>
+
+                <p>
+                    Located in Chandrapur Municipality, Rautahat District,
+                    Madhesh Province, Nepal, the Baidehi Solar PV Project is
+                    strategically positioned near the Chandrapur 132/33 kV
+                    Substation.
+                </p>
+
+                <p>
+                    The project is designed to generate approximately
+                    17.4 million kWh of clean electricity annually and supply
+                    renewable energy to Nepal's national grid.
+                </p>
+
+
+                <div class="project-info-grid">
+
+                    <div>
+                        <span>Location</span>
+                        <strong>Chandrapur, Rautahat</strong>
+                    </div>
+
+                    <div>
+                        <span>Province</span>
+                        <strong>Madhesh Province</strong>
+                    </div>
+
+                    <div>
+                        <span>Annual Generation</span>
+                        <strong>17.4 Million kWh</strong>
+                    </div>
+
+                    <div>
+                        <span>PPA Tariff</span>
+                        <strong>NRs. 5.53 / kWh</strong>
+                    </div>
+
+                </div>
+
+
+                <a href="{% url 'project' %}"
+                   class="btn btn-project">
+                    View Project Details
+                    <i class="bi bi-arrow-right ms-2"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     GALLERY PREVIEW
+========================================= -->
+
+<section class="home-gallery-section">
+
+    <div class="container">
+
+        <div class="gallery-heading">
+
+            <div>
+                <div class="section-label">
+                    PROJECT GALLERY
+                </div>
+
+                <h2>
+                    Our Work in Pictures
+                </h2>
+            </div>
+
+            <a href="{% url 'gallery' %}"
+               class="gallery-view-link">
+                View Full Gallery
+                <i class="bi bi-arrow-right"></i>
+            </a>
+
+        </div>
+
+
+        {% if gallery_images %}
+
+        <div class="gallery-preview-grid">
+
+            {% for image in gallery_images %}
+
+                <div class="gallery-preview-item {% if forloop.first %}large{% endif %}">
+
+                    {% if image.image %}
+
+                        <img src="{{ image.image.url }}"
+                             alt="{{ image.title }}">
+
+                    {% else %}
+
+                        <div class="gallery-placeholder">
+                            <i class="bi bi-image"></i>
+                            <span>No image available</span>
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="gallery-empty">
+
+            <i class="bi bi-images"></i>
+
+            <h4>Gallery Coming Soon</h4>
+
+            <p>
+                Project photos and development updates will appear here.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     LATEST NEWS
+========================================= -->
+
+<section class="latest-news-section">
+
+    <div class="container">
+
+        <div class="news-heading">
+
+            <div>
+
+                <div class="section-label">
+                    NEWS & NOTICES
+                </div>
+
+                <h2>
+                    Latest Updates
+                </h2>
+
+            </div>
+
+            <a href="{% url 'news' %}"
+               class="news-view-link">
+                View All
+                <i class="bi bi-arrow-right"></i>
+            </a>
+
+        </div>
+
+
+        {% if latest_news %}
+
+        <div class="row g-4">
+
+            {% for notice in latest_news %}
+
+            <div class="col-md-6 col-lg-4">
+
+                <article class="news-card">
+
+                    {% if notice.image %}
+
+                        <img src="{{ notice.image.url }}"
+                             class="news-card-image"
+                             alt="{{ notice.title }}">
+
+                    {% else %}
+
+                        <div class="news-card-image-placeholder">
+                            <i class="bi bi-newspaper"></i>
+                        </div>
+
+                    {% endif %}
+
+
+                    <div class="news-card-body">
+
+                        <div class="news-date">
+                            {{ notice.published_date|date:"F d, Y" }}
+                        </div>
+
+                        <h3>
+                            {{ notice.title }}
+                        </h3>
+
+                        <p>
+                            {{ notice.content|truncatewords:25 }}
+                        </p>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="news-empty">
+
+            <i class="bi bi-newspaper"></i>
+
+            <h4>No News or Notices Yet</h4>
+
+            <p>
+                Company news and official notices will be published here.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     CONTACT CTA
+========================================= -->
+
+<section class="contact-cta-section">
+
+    <div class="container">
+
+        <div class="contact-cta-box">
+
+            <div class="contact-cta-content">
+
+                <div class="section-label">
+                    LET'S CONNECT
+                </div>
+
+                <h2>
+                    Building a Cleaner
+                    <span>Energy Future Together</span>
+                </h2>
+
+                <p>
+                    Have a question about Baidehi Energy or our solar power
+                    project? Get in touch with our team.
+                </p>
+
+                <a href="{% url 'contact' %}"
+                   class="btn btn-light-custom">
+                    Contact Us
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+
+            </div>
+
+
+            <div class="contact-cta-info">
+
+                <div>
+
+                    <i class="bi bi-envelope"></i>
+
+                    <span>Email</span>
+
+                    <a href="mailto:info@baidehienergy.com">
+                        info@baidehienergy.com
+                    </a>
+
+                </div>
+
+
+                <div>
+
+                    <i class="bi bi-geo-alt"></i>
+
+                    <span>Location</span>
+
+                    <p>
+                        Nepal
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

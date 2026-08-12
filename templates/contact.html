@@ -1,0 +1,429 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Us | Baidehi Energy{% endblock %}
+
+{% block content %}
+
+<!-- =========================================
+     PAGE HEADER
+========================================= -->
+
+<section class="page-header">
+
+    <div class="container">
+
+        <span class="section-label">
+            GET IN TOUCH
+        </span>
+
+        <h1>
+            Contact Us
+        </h1>
+
+        <p>
+            We'd be happy to hear from you.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     CONTACT SECTION
+========================================= -->
+
+<section class="contact-section py-5">
+
+    <div class="container">
+
+        <div class="row g-5">
+
+
+            <!-- =================================
+                 CONTACT INFORMATION
+            ================================== -->
+
+            <div class="col-lg-5">
+
+                <span class="section-label">
+                    BAIDEHI ENERGY PVT. LTD.
+                </span>
+
+                <h2>
+                    Let's Connect
+                </h2>
+
+                <p class="contact-intro">
+
+                    For enquiries, partnerships, project information,
+                    or any other questions, please feel free to contact us.
+
+                </p>
+
+
+                <div class="contact-info">
+
+
+                    <!-- ADDRESS -->
+
+                    <div class="contact-item">
+
+                        <div class="contact-icon">
+                            <i class="bi bi-geo-alt"></i>
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Address
+                            </strong>
+
+                            <p>
+                                Chandrapur Municipality<br>
+                                Rautahat, Nepal
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div class="contact-item">
+
+                        <div class="contact-icon">
+                            <i class="bi bi-envelope"></i>
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Email
+                            </strong>
+
+                            <p>
+                                <a href="mailto:info@baidehienergy.com.np">
+                                    info@baidehienergy.com.np
+                                </a>
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PHONE -->
+
+                    <div class="contact-item">
+
+                        <div class="contact-icon">
+                            <i class="bi bi-telephone"></i>
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Phone
+                            </strong>
+
+                            <p>
+                                <a href="tel:+9779856023100">
+                                    +977-9856023100
+                                </a>
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================
+                 CONTACT FORM
+            ================================== -->
+
+            <div class="col-lg-7">
+
+                <div class="contact-form-card">
+
+                    <h3>
+                        Send Us a Message
+                    </h3>
+
+                    <p>
+                        Fill out the form below and our team will get
+                        back to you.
+                    </p>
+
+
+                    <!-- SUCCESS MESSAGE -->
+
+                    {% if message_sent %}
+
+                    <div class="alert alert-success mb-4">
+
+                        <i class="bi bi-check-circle me-2"></i>
+
+                        Thank you for contacting Baidehi Energy.
+                        Your message has been received successfully.
+
+                    </div>
+
+                    {% endif %}
+
+
+                    <!-- FORM -->
+
+                    <form method="POST" action="">
+
+                        {% csrf_token %}
+
+                        <div class="row g-3">
+
+
+                            <!-- NAME -->
+
+                            <div class="col-md-6">
+
+                                <label for="contact-name">
+                                    Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="contact-name"
+                                    name="name"
+                                    class="form-control"
+                                    placeholder="Your name"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <!-- COMPANY -->
+
+                            <div class="col-md-6">
+
+                                <label for="contact-company">
+                                    Company
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="contact-company"
+                                    name="company"
+                                    class="form-control"
+                                    placeholder="Company name"
+                                >
+
+                            </div>
+
+
+                            <!-- EMAIL -->
+
+                            <div class="col-md-6">
+
+                                <label for="contact-email">
+                                    Email
+                                </label>
+
+                                <input
+                                    type="email"
+                                    id="contact-email"
+                                    name="email"
+                                    class="form-control"
+                                    placeholder="Your email"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <!-- PHONE -->
+
+                            <div class="col-md-6">
+
+                                <label for="contact-phone">
+                                    Phone
+                                </label>
+
+                                <input
+                                    type="tel"
+                                    id="contact-phone"
+                                    name="phone"
+                                    class="form-control"
+                                    placeholder="Phone number"
+                                >
+
+                            </div>
+
+
+                            <!-- SUBJECT -->
+
+                            <div class="col-12">
+
+                                <label for="contact-subject">
+                                    Subject
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="contact-subject"
+                                    name="subject"
+                                    class="form-control"
+                                    placeholder="Subject"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <!-- MESSAGE -->
+
+                            <div class="col-12">
+
+                                <label for="contact-message">
+                                    Message
+                                </label>
+
+                                <textarea
+                                    id="contact-message"
+                                    name="message"
+                                    class="form-control"
+                                    rows="6"
+                                    placeholder="Write your message..."
+                                    required
+                                ></textarea>
+
+                            </div>
+
+
+                            <!-- BUTTON -->
+
+                            <div class="col-12">
+
+                                <button
+                                    type="submit"
+                                    class="btn btn-dark-custom"
+                                >
+
+                                    Send Message
+
+                                    <i class="bi bi-arrow-right"></i>
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     LOCATION / MAP
+========================================= -->
+
+<section class="map-section">
+
+    <div class="container">
+
+        <div class="section-heading-center">
+
+            <span class="section-label">
+                OUR LOCATION
+            </span>
+
+            <h2>
+                Baidehi Solar PV Project
+            </h2>
+
+        </div>
+
+
+        <div class="map-container">
+
+            <div id="baidehi-map"></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     LEAFLET MAP
+========================================= -->
+
+<link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+
+
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    var mapElement = document.getElementById("baidehi-map");
+
+    if (!mapElement) {
+        return;
+    }
+
+
+    var map = L.map("baidehi-map").setView(
+        [27.1183, 85.3747],
+        15
+    );
+
+
+    L.tileLayer(
+        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        {
+            maxZoom: 19,
+            attribution: "© OpenStreetMap Contributors"
+        }
+    ).addTo(map);
+
+
+    var marker = L.marker(
+        [27.138611, 85.412133]
+    ).addTo(map);
+
+
+    marker.bindPopup(
+        "<b>Baidehi Energy Pvt. Ltd.</b><br>" +
+        "10 MW AC Solar PV Project<br>" +
+        "Chandrapur Municipality<br>" +
+        "Rautahat, Nepal"
+    ).openPopup();
+
+});
+
+</script>
+
+
+{% endblock %}

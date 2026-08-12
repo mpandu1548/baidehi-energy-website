@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Gallery | Baidehi Energy{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+    <div class="container">
+        <span class="section-label">PROJECT GALLERY</span>
+        <h1>Baidehi Solar PV Project</h1>
+        <p>
+            A glimpse into our project development and solar energy journey.
+        </p>
+    </div>
+</section>
+
+
+<section class="gallery-page py-5">
+
+    <div class="container">
+
+        <div class="row g-4">
+
+            {% for image in images %}
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="gallery-card">
+
+                    <div class="gallery-image-wrapper">
+
+                        <img
+                            src="{{ image.image.url }}"
+                            alt="{{ image.title }}"
+                        >
+
+                        <div class="gallery-overlay">
+                            <i class="bi bi-arrows-fullscreen"></i>
+                        </div>
+
+                    </div>
+
+                    <div class="gallery-card-content">
+
+                        <h5>{{ image.title }}</h5>
+
+                        {% if image.description %}
+                        <p>{{ image.description }}</p>
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <div class="col-12">
+
+                <div class="gallery-empty text-center">
+
+                    <i class="bi bi-images"></i>
+
+                    <h4>Project Gallery</h4>
+
+                    <p>
+                        Project photographs and updates will be added here.
+                    </p>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

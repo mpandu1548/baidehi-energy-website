@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block title %}Our Team | Baidehi Energy{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+    <div class="container">
+
+        <span class="section-label">
+            OUR TEAM
+        </span>
+
+        <h1>People Behind Baidehi Energy</h1>
+
+        <p>
+            Our dedicated professionals bring together expertise in renewable
+            energy, engineering, project management, finance and operations.
+        </p>
+
+    </div>
+</section>
+
+
+<section class="team-page py-5">
+
+    <div class="container">
+
+        <div class="team-intro">
+
+            <p>
+                At Baidehi Energy Pvt. Ltd., our success is driven by a
+                dedicated team of professionals committed to delivering
+                sustainable energy solutions. We bring together expertise in
+                renewable energy, engineering, project management,
+                environmental compliance, finance, and operations.
+            </p>
+
+        </div>
+
+
+        {% regroup members by get_category_display as category_list %}
+
+        {% for category in category_list %}
+
+        <div class="team-category">
+
+            <div class="team-category-title">
+
+                <span></span>
+
+                <h2>{{ category.grouper }}</h2>
+
+                <span></span>
+
+            </div>
+
+
+            <div class="row g-4">
+
+                {% for member in category.list %}
+
+                <div class="col-lg-3 col-md-4 col-sm-6">
+
+                    <div class="team-card">
+
+                        <div class="team-photo">
+
+                            {% if member.photo %}
+
+                            <img
+                                src="{{ member.photo.url }}"
+                                alt="{{ member.name }}"
+                            >
+
+                            {% else %}
+
+                            <div class="team-photo-placeholder">
+                                <i class="bi bi-person"></i>
+                            </div>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <div class="team-info">
+
+                            <h5>{{ member.name }}</h5>
+
+                            <p>{{ member.position }}</p>
+
+                            {% if member.bio %}
+                            <small>{{ member.bio }}</small>
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="team-empty text-center">
+
+            <i class="bi bi-people"></i>
+
+            <h4>Our Team</h4>
+
+            <p>
+                Team information will be added soon.
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}

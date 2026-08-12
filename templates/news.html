@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}News & Notices | Baidehi Energy{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+    <div class="container">
+
+        <span class="section-label">
+            NEWS & NOTICES
+        </span>
+
+        <h1>Latest Updates</h1>
+
+        <p>
+            Updates, announcements and developments from Baidehi Energy.
+        </p>
+
+    </div>
+</section>
+
+
+<section class="news-page py-5">
+
+    <div class="container">
+
+        <div class="row g-4">
+
+            {% for notice in notices %}
+
+            <div class="col-lg-4 col-md-6">
+
+                <article class="news-card">
+
+                    {% if notice.image %}
+
+                    <div class="news-image">
+                        <img
+                            src="{{ notice.image.url }}"
+                            alt="{{ notice.title }}"
+                        >
+                    </div>
+
+                    {% endif %}
+
+
+                    <div class="news-content">
+
+                        <span class="news-date">
+                            {{ notice.published_date|date:"d M Y" }}
+                        </span>
+
+                        <h3>
+                            {{ notice.title }}
+                        </h3>
+
+                        <p>
+                            {{ notice.content }}
+                        </p>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+            {% empty %}
+
+            <div class="col-12">
+
+                <div class="news-empty text-center">
+
+                    <i class="bi bi-newspaper"></i>
+
+                    <h4>News & Notices</h4>
+
+                    <p>
+                        Updates and announcements will appear here.
+                    </p>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

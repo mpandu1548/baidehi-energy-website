@@ -1,0 +1,843 @@
+{% extends "base.html" %}
+
+{% block title %}About Us | Baidehi Energy{% endblock %}
+
+{% block content %}
+
+<!-- PAGE HEADER -->
+<section class="page-header">
+    <div class="container">
+
+        <span class="section-label">
+            ABOUT BAIDEHI ENERGY
+        </span>
+
+        <h1>Powering Nepal's Clean Energy Future</h1>
+
+        <p>
+            Building sustainable, reliable and responsible solar
+            power infrastructure for Nepal.
+        </p>
+
+    </div>
+</section>
+
+
+<!-- ABOUT COMPANY -->
+<section class="about-main py-5">
+
+    <div class="container">
+
+        <div class="row align-items-center g-5">
+
+            <div class="col-lg-7">
+
+                <span class="section-label">
+                    WHO WE ARE
+                </span>
+
+                <h2>
+                    Building Nepal's
+                    <span>Clean Energy Future</span>
+                </h2>
+
+                <p>
+                    Baidehi Energy Pvt. Ltd. is a Nepal-based renewable
+                    energy company dedicated to developing sustainable,
+                    reliable, and environmentally responsible solar power
+                    infrastructure.
+                </p>
+
+                <p>
+                    We are committed to accelerating Nepal's transition
+                    to clean energy by delivering high-quality
+                    utility-scale solar projects that strengthen
+                    national energy security, support economic growth,
+                    and contribute to a low-carbon future.
+                </p>
+
+                <p>
+                    Our flagship development, the Baidehi Solar PV
+                    Project, is a 10 MW AC grid-connected solar power
+                    plant located in Chandrapur Municipality, Rautahat
+                    District, Madhesh Province, Nepal.
+                </p>
+
+            </div>
+
+
+            <div class="col-lg-5">
+
+                <div class="about-highlight-card">
+
+                    <div class="highlight-number">
+                        10 MW
+                    </div>
+
+                    <div class="highlight-title">
+                        AC Installed Capacity
+                    </div>
+
+                    <hr>
+
+                    <div class="highlight-number">
+                        17.4M
+                    </div>
+
+                    <div class="highlight-title">
+                        kWh Estimated Annual Generation
+                    </div>
+
+                    <hr>
+
+                    <div class="highlight-number">
+                        25 Years
+                    </div>
+
+                    <div class="highlight-title">
+                        Expected Plant Life
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     OUR TEAM
+     ========================================================= -->
+
+<section class="about-team-section py-5">
+
+    <div class="container">
+
+        <!-- SECTION HEADING -->
+        <div class="section-heading-center mb-5">
+
+            <span class="section-label">
+                OUR TEAM
+            </span>
+
+            <h2>
+                The People Behind Baidehi Energy
+            </h2>
+
+            <p>
+                Experienced professionals working together to develop
+                reliable and sustainable renewable energy infrastructure.
+            </p>
+
+        </div>
+
+
+        <!-- =================================================
+             CHAIRMAN
+             ================================================= -->
+
+        {% for member in members %}
+
+            {% if member.position|lower == "chairman" %}
+
+            <div class="chairman-profile">
+
+                <div class="chairman-profile-photo">
+
+                    {% if member.photo %}
+
+                        <img
+                            src="{{ member.photo.url }}"
+                            alt="{{ member.name }}"
+                        >
+
+                    {% else %}
+
+                        <div class="team-photo-placeholder">
+                            <i class="bi bi-person"></i>
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="chairman-profile-content">
+
+                    <span class="team-category-label">
+                        LEADERSHIP
+                    </span>
+
+                    <h3>
+                        {{ member.name }}
+                    </h3>
+
+                    <h5>
+                        {{ member.position }}
+                    </h5>
+
+                    {% if member.bio %}
+
+                        <p>
+                            {{ member.bio }}
+                        </p>
+
+                    {% else %}
+
+                        <p>
+                            Providing leadership and strategic direction
+                            for Baidehi Energy's renewable energy
+                            development and long-term growth.
+                        </p>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+        {% endfor %}
+
+
+        <!-- =================================================
+             OTHER TEAM MEMBERS
+             ================================================= -->
+
+        <div class="team-section-subheading">
+
+            <span class="section-label">
+                OUR PROFESSIONALS
+            </span>
+
+            <h3>
+                Leadership &amp; Professional Team
+            </h3>
+
+        </div>
+
+
+        <div class="about-team-grid">
+
+            {% for member in members %}
+
+                {% if member.position|lower != "chairman" %}
+
+                <div class="about-team-card">
+
+                    <!-- PHOTO -->
+
+                    <div class="about-team-photo">
+
+                        {% if member.photo %}
+
+                            <img
+                                src="{{ member.photo.url }}"
+                                alt="{{ member.name }}"
+                            >
+
+                        {% else %}
+
+                            <div class="about-team-placeholder">
+                                <i class="bi bi-person"></i>
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- INFORMATION -->
+
+                    <div class="about-team-info">
+
+                        <span class="about-team-category">
+                            {{ member.get_category_display }}
+                        </span>
+
+                        <h3>
+                            {{ member.name }}
+                        </h3>
+
+                        <p>
+                            {{ member.position }}
+                        </p>
+
+                        {% if member.bio %}
+
+                            <div class="about-team-bio">
+                                {{ member.bio }}
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+                {% endif %}
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     PROJECT INTRO
+     ========================================================= -->
+
+<section class="about-project-section">
+
+    <div class="container">
+
+        <div class="row align-items-center g-5">
+
+            <div class="col-lg-6">
+
+                <span class="section-label">
+                    OUR FLAGSHIP DEVELOPMENT
+                </span>
+
+                <h2>
+                    Baidehi Solar PV Project
+                </h2>
+
+                <p>
+                    Strategically situated near the Chandrapur 132/33 kV
+                    Substation, the project benefits from excellent solar
+                    resources, strong transportation access, and efficient
+                    integration into Nepal's national electricity grid.
+                </p>
+
+                <p>
+                    Designed to generate approximately 17.4 million kWh
+                    of clean electricity annually, the project will supply
+                    renewable energy to the national grid while reducing
+                    greenhouse gas emissions and supporting Nepal's
+                    long-term sustainability goals.
+                </p>
+
+            </div>
+
+
+            <div class="col-lg-6">
+
+                <div class="about-project-placeholder">
+
+                    <i class="bi bi-sun"></i>
+
+                    <h4>
+                        Solar Project
+                    </h4>
+
+                    <p>
+                        Project photographs will be added here.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     VISION
+     ========================================================= -->
+
+<section class="vision-section py-5">
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-9 text-center">
+
+                <span class="section-label">
+                    OUR VISION
+                </span>
+
+                <h2>
+                    A Cleaner Future for Nepal
+                </h2>
+
+                <p class="large-text">
+                    To be a leading renewable energy company in Nepal,
+                    delivering innovative and sustainable energy solutions
+                    that empower communities, protect the environment,
+                    and contribute to national prosperity.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     MISSION
+     ========================================================= -->
+
+<section class="mission-section py-5">
+
+    <div class="container">
+
+        <div class="section-heading-center">
+
+            <span class="section-label">
+                OUR MISSION
+            </span>
+
+            <h2>
+                What Drives Us
+            </h2>
+
+        </div>
+
+
+        <div class="row g-4 mt-3">
+
+
+            <!-- CLEAN ENERGY -->
+
+            <div class="col-lg-4">
+
+                <div class="value-card">
+
+                    <i class="bi bi-sun"></i>
+
+                    <h4>
+                        Clean Energy
+                    </h4>
+
+                    <p>
+                        Develop world-class utility-scale solar and
+                        renewable energy projects using advanced,
+                        reliable and sustainable technologies.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- RELIABLE POWER -->
+
+            <div class="col-lg-4">
+
+                <div class="value-card">
+
+                    <i class="bi bi-lightning-charge"></i>
+
+                    <h4>
+                        Reliable Power
+                    </h4>
+
+                    <p>
+                        Deliver clean, reliable and affordable electricity
+                        that supports Nepal's growing energy needs and
+                        strengthens the national grid.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- LOW CARBON -->
+
+            <div class="col-lg-4">
+
+                <div class="value-card">
+
+                    <i class="bi bi-globe2"></i>
+
+                    <h4>
+                        Low-Carbon Future
+                    </h4>
+
+                    <p>
+                        Accelerate Nepal's transition toward a low-carbon
+                        future by promoting renewable energy.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- EXCELLENCE -->
+
+            <div class="col-lg-4">
+
+                <div class="value-card">
+
+                    <i class="bi bi-award"></i>
+
+                    <h4>
+                        Excellence
+                    </h4>
+
+                    <p>
+                        Uphold the highest standards of innovation,
+                        quality, safety and operational excellence.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- PARTNERSHIP -->
+
+            <div class="col-lg-4">
+
+                <div class="value-card">
+
+                    <i class="bi bi-people"></i>
+
+                    <h4>
+                        Partnership
+                    </h4>
+
+                    <p>
+                        Build long-term partnerships with investors,
+                        financial institutions, government agencies
+                        and local communities.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- SUSTAINABLE VALUE -->
+
+            <div class="col-lg-4">
+
+                <div class="value-card">
+
+                    <i class="bi bi-tree"></i>
+
+                    <h4>
+                        Sustainable Value
+                    </h4>
+
+                    <p>
+                        Create lasting economic, environmental and
+                        social value for stakeholders and future
+                        generations.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     OBJECTIVES
+     ========================================================= -->
+
+<section class="objectives-section py-5">
+
+    <div class="container">
+
+        <div class="row g-5 align-items-center">
+
+            <div class="col-lg-5">
+
+                <span class="section-label">
+                    OUR OBJECTIVES
+                </span>
+
+                <h2>
+                    Turning Clean Energy
+                    Into Lasting Value
+                </h2>
+
+            </div>
+
+
+            <div class="col-lg-7">
+
+                <ul class="objective-list">
+
+                    <li>
+                        Generate clean, reliable and sustainable electricity
+                        through utility-scale solar power projects.
+                    </li>
+
+                    <li>
+                        Support Nepal's renewable energy policies, national
+                        energy security and long-term sustainability goals.
+                    </li>
+
+                    <li>
+                        Supply high-quality renewable electricity to Nepal's
+                        national grid through efficient and dependable
+                        operations.
+                    </li>
+
+                    <li>
+                        Develop environmentally responsible energy
+                        infrastructure that minimizes carbon emissions.
+                    </li>
+
+                    <li>
+                        Adopt advanced technologies and international best
+                        practices to maximize efficiency, safety and
+                        long-term performance.
+                    </li>
+
+                    <li>
+                        Foster strategic partnerships with investors,
+                        financial institutions, government agencies and
+                        local communities.
+                    </li>
+
+                    <li>
+                        Create sustainable economic, environmental and
+                        social value for our shareholders, stakeholders
+                        and future generations.
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CORE VALUES
+     ========================================================= -->
+
+<section class="core-values-section py-5">
+
+    <div class="container">
+
+        <div class="section-heading-center">
+
+            <span class="section-label">
+                OUR CORE VALUES
+            </span>
+
+            <h2>
+                Principles That Guide Us
+            </h2>
+
+        </div>
+
+
+        <div class="row g-4 mt-3">
+
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="core-value-card">
+
+                    <h4>
+                        Sustainability
+                    </h4>
+
+                    <p>
+                        Advancing Nepal's clean energy transition through
+                        environmentally responsible renewable energy
+                        development.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="core-value-card">
+
+                    <h4>
+                        Integrity
+                    </h4>
+
+                    <p>
+                        Conducting our business with honesty, transparency,
+                        accountability and the highest ethical standards.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="core-value-card">
+
+                    <h4>
+                        Excellence
+                    </h4>
+
+                    <p>
+                        Delivering high-quality engineering, operational
+                        efficiency, innovation and continuous improvement.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="core-value-card">
+
+                    <h4>
+                        Safety
+                    </h4>
+
+                    <p>
+                        Placing the health, safety and well-being of our
+                        people, partners and communities first.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="core-value-card">
+
+                    <h4>
+                        Innovation
+                    </h4>
+
+                    <p>
+                        Embracing advanced technologies, creative thinking
+                        and sustainable solutions.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="core-value-card">
+
+                    <h4>
+                        Partnership
+                    </h4>
+
+                    <p>
+                        Building strong collaboration with investors,
+                        government agencies, communities and strategic
+                        partners.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="core-value-card">
+
+                    <h4>
+                        Environmental Responsibility
+                    </h4>
+
+                    <p>
+                        Minimizing environmental impacts, reducing carbon
+                        emissions and promoting sustainable development.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     COMMITMENT
+     ========================================================= -->
+
+<section class="commitment-section py-5">
+
+    <div class="container">
+
+        <div class="commitment-box">
+
+            <span class="section-label">
+                OUR COMMITMENT
+            </span>
+
+            <h2>
+                Investing in Nepal's Future
+            </h2>
+
+            <p>
+                At Baidehi Energy Pvt. Ltd., we are committed to developing
+                renewable energy projects that create lasting environmental,
+                economic and social value.
+            </p>
+
+            <p>
+                Through responsible project development, advanced solar
+                technology and adherence to international standards of
+                quality, safety and sustainability, we strive to deliver
+                reliable clean energy that supports Nepal's long-term
+                energy security and sustainable development.
+            </p>
+
+            <p>
+                We are dedicated to building strong partnerships with
+                investors, financial institutions, government agencies,
+                local communities and other stakeholders. By combining
+                innovation, operational excellence and environmental
+                stewardship, we aim to generate sustainable returns while
+                making a meaningful contribution to Nepal's renewable
+                energy future.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

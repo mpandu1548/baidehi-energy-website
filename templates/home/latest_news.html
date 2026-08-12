@@ -1,0 +1,96 @@
+<section class="latest-news-section">
+
+    <div class="container">
+
+        <div class="news-heading">
+
+            <div>
+
+                <span class="section-label">
+                    NEWS & NOTICES
+                </span>
+
+                <h2>
+                    Latest Updates
+                </h2>
+
+            </div>
+
+            <a href="/news/" class="news-view-link">
+                View All News
+                <i class="bi bi-arrow-right"></i>
+            </a>
+
+        </div>
+
+
+        <div class="row g-4">
+
+            {% for news in latest_news %}
+
+            <div class="col-md-6 col-lg-4">
+
+                <article class="news-card">
+
+                    {% if news.image %}
+
+                    <img
+                        src="{{ news.image.url }}"
+                        alt="{{ news.title }}"
+                        class="news-card-image"
+                    >
+
+                    {% else %}
+
+                    <div class="news-card-image-placeholder">
+                        <i class="bi bi-newspaper"></i>
+                    </div>
+
+                    {% endif %}
+
+
+                    <div class="news-card-body">
+
+                        <span class="news-date">
+                            {{ news.date|date:"d M Y" }}
+                        </span>
+
+                        <h3>
+                            {{ news.title }}
+                        </h3>
+
+                        <p>
+                            {{ news.content|truncatewords:22 }}
+                        </p>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+            {% empty %}
+
+            <div class="col-12">
+
+                <div class="news-empty">
+
+                    <i class="bi bi-newspaper"></i>
+
+                    <h4>No news or notices yet</h4>
+
+                    <p>
+                        News and project updates will appear here.
+                    </p>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
