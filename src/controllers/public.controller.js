@@ -1,4 +1,4 @@
-const { activeMembers, activeGallery, publishedNews, categoryLabels, categoryOrder } = require('../services/content');
+const { activeMembers, activeGallery, publishedNews, publishedNewsById, categoryLabels, categoryOrder } = require('../services/content');
 const { ContactMessage } = require('../models');
 
 function render(res, view, page, data = {}) {
@@ -44,6 +44,15 @@ exports.team = async (req, res, next) => {
 };
 exports.news = async (req, res, next) => {
   try { return render(res, 'news.html', 'news', { notices: await publishedNews() }); } catch (error) { return next(error); }
+};
+exports.newsDetail = async (req, res, next) => {
+  const id = Number.parseInt(req.params.id, 10);
+  if (!Number.isSafeInteger(id) || id < 1) return res.status(404).send('News item not found');
+  try {
+    const notice = await publishedNewsById(id);
+    if (!notice) return res.status(404).send('News item not found');
+    return render(res, 'news-detail.html', 'news', { notice });
+  } catch (error) { return next(error); }
 };
 exports.contact = (req, res) => render(res, 'contact.html', 'contact', { message_sent: req.query.sent === '1' });
 exports.submitContact = async (req, res, next) => {

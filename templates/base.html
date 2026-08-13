@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap"
         rel="stylesheet"
     >
 
@@ -36,7 +36,7 @@
     <!-- Custom CSS -->
     <link
         rel="stylesheet"
-        href="/static/css/style.css"
+        href="/static/css/style.css?v=20260813-7"
     >
 
     {% block extra_css %}
@@ -61,6 +61,41 @@
     <!-- Bootstrap JS -->
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+    <script>
+        (() => {
+            const navbar = document.querySelector('.baidehi-navbar');
+            const setNavbarState = () => navbar?.classList.toggle('is-scrolled', window.scrollY > 24);
+            setNavbarState();
+            window.addEventListener('scroll', setNavbarState, { passive: true });
+
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+            const revealTargets = document.querySelectorAll([
+                '.home-about-section .row > div', '.why-card', '.flagship-project-section .row > div',
+                '.latest-news-section .news-card', '.home-contact-card', '.page-header .container',
+                '.about-main .row > div', '.about-team-card', '.team-card', '.gallery-card', '.news-card',
+                '.contact-section .row > div', '.chairman-section .row > div', '.project-showcase__copy',
+                '.project-showcase__image', '.project-showcase__art', '.project-stat-card', '.technology-card',
+                '.environment-card', '.advantage-list', '.project-overview .table-responsive'
+            ].join(','));
+
+            if (!('IntersectionObserver' in window)) return;
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -28px' });
+
+            revealTargets.forEach((target, index) => {
+                target.style.setProperty('--reveal-delay', `${Math.min(index % 4, 3) * 65}ms`);
+                target.classList.add('will-reveal');
+                observer.observe(target);
+            });
+        })();
     </script>
 
     {% block extra_js %}

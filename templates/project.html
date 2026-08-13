@@ -22,7 +22,7 @@
             </div>
             {% if projectImage %}
             <div class="project-showcase__image">
-                <img src="{{ projectImage.imageUrl }}" alt="{{ projectImage.title }}">
+                <img src="{{ projectImage.imageUrl }}" alt="{{ projectImage.title }}" loading="lazy" decoding="async">
                 <div class="project-showcase__caption"><i class="bi bi-sun-fill"></i><span>Grid-connected<br><strong>Solar Power</strong></span></div>
             </div>
             {% else %}

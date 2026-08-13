@@ -37,6 +37,7 @@ const ContactMessage = sequelize.define('ContactMessage', {
   phone: { type: DataTypes.STRING(50), allowNull: false, defaultValue: '' },
   subject: { type: DataTypes.STRING(250), allowNull: false },
   message: { type: DataTypes.TEXT, allowNull: false },
+  isRead: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false, field: 'is_read' },
   createdAt: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW, field: 'created_at' },
 }, { tableName: 'contact_messages', underscored: true, createdAt: 'created_at', updatedAt: false });
 

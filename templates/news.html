@@ -40,6 +40,8 @@
                         <img
                             src="{{ notice.imageUrl }}"
                             alt="{{ notice.title }}"
+                            loading="lazy"
+                            decoding="async"
                         >
                     </div>
 
@@ -52,13 +54,15 @@
                             {{ notice.publishedDate|date('d M Y') }}
                         </span>
 
-                        <h3>
-                            {{ notice.title }}
-                        </h3>
+                        <h3><a href="/news/{{ notice.id }}/">{{ notice.title }}</a></h3>
 
                         <p>
                             {{ notice.content }}
                         </p>
+
+                        <a class="news-read-link" href="/news/{{ notice.id }}/">
+                            Read full notice <i class="bi bi-arrow-right"></i>
+                        </a>
 
                         {% if notice.attachmentUrl %}
                         <a class="news-document-link" href="{{ notice.attachmentUrl }}" target="_blank" rel="noopener">

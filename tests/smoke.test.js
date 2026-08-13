@@ -29,15 +29,16 @@ async function validateMultipart(req, res) {
 
 async function main() {
   await initialiseDatabase();
-  const [member, image, notice] = await Promise.all([
+  const [member, image, notice, contactMessage] = await Promise.all([
     TeamMember.create({ name: 'Test Chairman', position: 'Chairman', category: 'leadership', order: 1 }),
     GalleryImage.create({ title: 'Test Gallery Image', image: 'gallery/photo1.jpg', order: 1, createdAt: new Date() }),
     NewsNotice.create({ title: 'Test Notice', content: 'A test notice for route verification.', attachment: 'news/test-notice.pdf', publishedDate: '2026-01-01', createdAt: new Date() }),
+    ContactMessage.create({ name: 'Inbox Sender', company: 'Inbox Company', email: 'inbox@example.com', phone: '+977-9811111111', subject: 'Inbox test', message: 'A message for admin action verification.' }),
   ]);
   const galleryImage = { ...image.get({ plain: true }), imageUrl: '/media/gallery/photo1.jpg' };
   const noticeWithAttachment = { ...notice.get({ plain: true }), attachmentUrl: '/media/news/test-notice.pdf' };
-  const context = { page: 'home', isAdmin: true, messages: { error: [], success: [] }, csrfToken: 'test-token', members: [member], category_list: [{ grouper: 'Leadership', list: [member] }], images: [galleryImage], notices: [notice], latest_news: [notice], gallery_images: [galleryImage], aboutImage: galleryImage, aboutProjectImage: galleryImage, projectImage: galleryImage, message_sent: false, config: { title: 'Team members', fields: ['name', 'position', 'category', 'bio', 'order', 'isActive'], upload: 'photo' }, name: 'team', items: [member], item: member, counts: { team: 1, gallery: 1, news: 1, messages: 0 }, messagesList: [] };
-  for (const page of ['home.html', 'about.html', 'chairman.html', 'project.html', 'gallery.html', 'team.html', 'news.html', 'contact.html', 'admin/login.html', 'admin/dashboard.html', 'admin/list.html', 'admin/form.html', 'admin/messages.html', 'admin/gallery-batch.html']) {
+  const context = { page: 'home', isAdmin: true, messages: { error: [], success: [] }, csrfToken: 'test-token', members: [member], category_list: [{ grouper: 'Leadership', list: [member] }], images: [galleryImage], notices: [notice], latest_news: [notice], notice: noticeWithAttachment, gallery_images: [galleryImage], aboutImage: galleryImage, aboutProjectImage: galleryImage, projectImage: galleryImage, message_sent: false, config: { title: 'Team members', fields: ['name', 'position', 'category', 'bio', 'order', 'isActive'], upload: 'photo' }, name: 'team', items: [member], item: member, counts: { team: 1, gallery: 1, news: 1, messages: 1 }, messagesList: [contactMessage] };
+  for (const page of ['home.html', 'about.html', 'chairman.html', 'project.html', 'gallery.html', 'team.html', 'news.html', 'news-detail.html', 'contact.html', 'admin/login.html', 'admin/dashboard.html', 'admin/list.html', 'admin/form.html', 'admin/messages.html', 'admin/gallery-batch.html']) {
     const html = await render(page, { ...context, notices: [noticeWithAttachment], latest_news: [noticeWithAttachment] });
     assert.ok(html.length > 100, `${page} should render content`);
     if (page === 'home.html' || page === 'about.html') assert.match(html, /\/media\/gallery\/photo1\.jpg/, `${page} should use configured gallery imagery`);
@@ -45,10 +46,16 @@ async function main() {
     if (page === 'gallery.html') assert.doesNotMatch(html, />\s*Test Gallery Image\s*</, 'Gallery should not show image title captions');
     if (page === 'gallery.html') assert.match(html, /gallery-lightbox/, 'Gallery should include a fullscreen lightbox');
     if (page === 'news.html') assert.match(html, /\/media\/news\/test-notice\.pdf/, 'News should render a document download link');
+    if (page === 'news.html' || page === 'home.html') assert.match(html, /\/news\/\d+\//, `${page} should link to a readable news page`);
+    if (page === 'news-detail.html') assert.match(html, /Back to News/, 'News detail should include a route back to the index');
     if (page === 'home.html' || page === 'contact.html') assert.match(html, /27\.127831[^\d]+85\.389214/, `${page} should use the configured map coordinates`);
     if (page === 'contact.html') {
       assert.match(html, /name="company"[\s\S]*?required/, 'Company should be required');
       assert.match(html, /name="phone"[\s\S]*?required/, 'Phone should be required');
+    }
+    if (page === 'admin/messages.html') {
+      assert.match(html, /Mark as read/, 'Admin inbox should support marking a message as read');
+      assert.match(html, /\/admin\/messages\/\d+\/delete/, 'Admin inbox should support deleting a message');
     }
   }
 
@@ -75,7 +82,7 @@ async function main() {
   const response = { redirect: (location) => redirects.push(location), status() { return this; }, render() { throw new Error('Expected valid submission to redirect'); } };
   await contactController.submitContact(submission, response, (error) => { throw error; });
   assert.deepEqual(redirects, ['/contact/?sent=1']);
-  assert.equal(await ContactMessage.count(), 1);
+  assert.equal(await ContactMessage.count(), 2);
 
   let missingFieldStatus;
   const incompleteSubmission = { body: { ...submission.body, phone: '' }, flash() {} };

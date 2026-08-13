@@ -9,5 +9,6 @@ router.get('/project/', controller.project);
 router.get('/gallery/', controller.gallery);
 router.get('/team/', controller.team);
 router.get('/news/', controller.news);
+router.get('/news/:id/', controller.newsDetail);
 router.route('/contact/').get(controller.contact).post(controller.submitContact);
 module.exports = router;

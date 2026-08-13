@@ -29,4 +29,11 @@ async function publishedNews(limit) {
   return (await NewsNotice.findAll(options)).map((notice) => present(notice, 'image'));
 }
 
-module.exports = { activeMembers, activeGallery, publishedNews, categoryLabels, categoryOrder, present };
+async function publishedNewsById(id) {
+  const notice = await NewsNotice.findOne({
+    where: { id, isPublished: true, publishedDate: { [Op.not]: null } },
+  });
+  return notice ? present(notice, 'image') : null;
+}
+
+module.exports = { activeMembers, activeGallery, publishedNews, publishedNewsById, categoryLabels, categoryOrder, present };

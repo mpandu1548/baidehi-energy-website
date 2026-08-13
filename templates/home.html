@@ -166,7 +166,7 @@
 
                 <div class="home-about-image">
                     {% if aboutImage %}
-                    <img src="{{ aboutImage.imageUrl }}" alt="{{ aboutImage.title }}">
+                    <img src="{{ aboutImage.imageUrl }}" alt="{{ aboutImage.title }}" loading="lazy" decoding="async">
                     {% else %}
                     <div class="dedicated-visual dedicated-visual--about" role="img" aria-label="Illustration of solar power supporting Nepal's clean energy future">
                         <div class="dedicated-visual__sun"></div>
@@ -315,7 +315,7 @@
 
                 <div class="flagship-project-image">
                     {% if projectImage %}
-                    <img src="{{ projectImage.imageUrl }}" alt="{{ projectImage.title }}">
+                    <img src="{{ projectImage.imageUrl }}" alt="{{ projectImage.title }}" loading="lazy" decoding="async">
                     {% else %}
                     <div class="dedicated-visual dedicated-visual--flagship" role="img" aria-label="Illustration of the Baidehi Solar PV Project">
                         <div class="dedicated-visual__sun"></div>
@@ -443,7 +443,9 @@
 
                         <img src="{{ notice.imageUrl }}"
                              class="news-card-image"
-                             alt="{{ notice.title }}">
+                             alt="{{ notice.title }}"
+                             loading="lazy"
+                             decoding="async">
 
                     {% else %}
 
@@ -460,13 +462,15 @@
                             {{ notice.publishedDate|date('F d, Y') }}
                         </div>
 
-                        <h3>
-                            {{ notice.title }}
-                        </h3>
+                        <h3><a href="/news/{{ notice.id }}/">{{ notice.title }}</a></h3>
 
                         <p>
                             {{ notice.content|truncatewords(25) }}
                         </p>
+
+                        <a class="news-read-link" href="/news/{{ notice.id }}/">
+                            Read full notice <i class="bi bi-arrow-right"></i>
+                        </a>
 
                         {% if notice.attachmentUrl %}
                         <a class="news-document-link" href="{{ notice.attachmentUrl }}" target="_blank" rel="noopener">
@@ -504,30 +508,5 @@
 
 </section>
 
-
-<!-- =========================================
-     CONTACT
-========================================= -->
-
-<section class="home-contact-section">
-    <div class="container">
-        <div class="home-contact-card">
-            <div class="home-contact-details">
-                <div class="section-label">GET IN TOUCH</div>
-                <h2>Let’s build a cleaner energy future together.</h2>
-                <p>For project information, partnerships, or general enquiries, our team would be glad to hear from you.</p>
-                <div class="home-contact-links">
-                    <a href="tel:+9779856023100"><i class="bi bi-telephone"></i><span>Call us</span>+977-9856023100</a>
-                    <a href="mailto:info@baidehienergy.com.np"><i class="bi bi-envelope"></i><span>Email us</span>info@baidehienergy.com.np</a>
-                </div>
-                <a href="/contact/" class="btn btn-project">Send a message <i class="bi bi-arrow-right ms-2"></i></a>
-            </div>
-            <div class="home-contact-map">
-                <iframe title="Baidehi Energy location" src="https://www.google.com/maps?q=27.127831%2C85.389214&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                <a href="https://www.google.com/maps/search/27.127831,+85.389214" target="_blank" rel="noopener"><i class="bi bi-geo-alt"></i> View our location</a>
-            </div>
-        </div>
-    </div>
-</section>
 
 {% endblock %}

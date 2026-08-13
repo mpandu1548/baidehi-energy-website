@@ -29,12 +29,29 @@ router.route('/login').get((req, res) => res.render('admin/login.html', { page: 
 router.post('/logout', requireAdmin, (req, res) => req.session.destroy(() => res.redirect('/admin/login')));
 router.get('/', requireAdmin, async (req, res, next) => {
   try {
-    const [team, gallery, news, messages] = await Promise.all([TeamMember.count(), GalleryImage.count(), NewsNotice.count(), ContactMessage.count()]);
+    const [team, gallery, news, messages] = await Promise.all([TeamMember.count(), GalleryImage.count(), NewsNotice.count(), ContactMessage.count({ where: { isRead: false } })]);
     res.render('admin/dashboard.html', { page: 'admin', adminSection: 'dashboard', counts: { team, gallery, news, messages } });
   } catch (error) { next(error); }
 });
 router.get('/messages', requireAdmin, async (req, res, next) => {
-  try { res.render('admin/messages.html', { page: 'admin', adminSection: 'messages', messages: await ContactMessage.findAll({ order: [['created_at', 'DESC']] }) }); } catch (error) { next(error); }
+  try { res.render('admin/messages.html', { page: 'admin', adminSection: 'messages', messagesList: await ContactMessage.findAll({ order: [['created_at', 'DESC']] }) }); } catch (error) { next(error); }
+});
+router.post('/messages/:id/read', requireAdmin, async (req, res, next) => {
+  try {
+    const item = await ContactMessage.findByPk(req.params.id);
+    if (!item) return res.sendStatus(404);
+    await item.update({ isRead: !item.isRead });
+    req.flash('success', item.isRead ? 'Message marked as read.' : 'Message marked as unread.');
+    return res.redirect('/admin/messages');
+  } catch (error) { return next(error); }
+});
+router.post('/messages/:id/delete', requireAdmin, async (req, res, next) => {
+  try {
+    const removed = await ContactMessage.destroy({ where: { id: req.params.id } });
+    if (!removed) return res.sendStatus(404);
+    req.flash('success', 'Message deleted.');
+    return res.redirect('/admin/messages');
+  } catch (error) { return next(error); }
 });
 router.get('/gallery/batch', requireAdmin, (req, res) => res.render('admin/gallery-batch.html', { page: 'admin', adminSection: 'gallery' }));
 router.post('/gallery/batch', requireAdmin, uploadManyTo('gallery'), validateMultipartCsrf, async (req, res, next) => {

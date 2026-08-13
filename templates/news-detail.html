@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}{{ notice.title }} | Baidehi Energy{% endblock %}
+
+{% block content %}
+<section class="page-header news-detail-header">
+    <div class="container">
+        <span class="section-label">NEWS &amp; NOTICES</span>
+        <h1>{{ notice.title }}</h1>
+        <p>{{ notice.publishedDate|date('d M Y') }}</p>
+    </div>
+</section>
+
+<article class="news-detail-section">
+    <div class="container">
+        <div class="news-detail-card">
+            {% if notice.image %}
+            <img class="news-detail-image" src="{{ notice.imageUrl }}" alt="{{ notice.title }}">
+            {% endif %}
+            <div class="news-detail-content">
+                <a class="news-back-link" href="/news/"><i class="bi bi-arrow-left"></i> Back to News &amp; Notices</a>
+                <h2>{{ notice.title }}</h2>
+                <p class="news-detail-date"><i class="bi bi-calendar3"></i> {{ notice.publishedDate|date('d M Y') }}</p>
+                <div class="news-detail-body">{{ notice.content }}</div>
+                {% if notice.attachmentUrl %}
+                <a class="news-document-link" href="{{ notice.attachmentUrl }}" target="_blank" rel="noopener"><i class="bi bi-file-earmark-arrow-down"></i> Download document</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</article>
+{% endblock %}

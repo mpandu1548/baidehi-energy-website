@@ -67,5 +67,13 @@ async function initialiseDatabase() {
       allowNull: true,
     });
   }
+  const messageColumns = await sequelize.getQueryInterface().describeTable('contact_messages');
+  if (!messageColumns.is_read) {
+    await sequelize.getQueryInterface().addColumn('contact_messages', 'is_read', {
+      type: require('sequelize').DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    });
+  }
 }
 module.exports = { app, initialiseDatabase };
