@@ -39,8 +39,7 @@
         </div>
 
 
-        {% regroup members by get_category_display as category_list %}
-
+        {% if category_list.length %}
         {% for category in category_list %}
 
         <div class="team-category">
@@ -69,7 +68,7 @@
                             {% if member.photo %}
 
                             <img
-                                src="{{ member.photo.url }}"
+                                src="{{ member.photoUrl }}"
                                 alt="{{ member.name }}"
                             >
 
@@ -106,7 +105,7 @@
 
         </div>
 
-        {% empty %}
+        {% else %}
 
         <div class="team-empty text-center">
 
@@ -121,6 +120,7 @@
         </div>
 
         {% endfor %}
+        {% endif %}
 
     </div>
 

@@ -4,82 +4,39 @@
 
 {% block content %}
 
-<section class="page-header">
+<!-- PROJECT INTRODUCTION -->
+<section class="project-showcase">
     <div class="container">
-
-        <span class="section-label">
-            OUR PROJECT
-        </span>
-
-        <h1>Baidehi Solar PV Project</h1>
-
-        <p>
-            10 MW AC / 12 MWp DC Grid-Connected Solar Power Project
-        </p>
-
-    </div>
-</section>
-
-
-<!-- PROJECT INTRO -->
-
-<section class="project-intro py-5">
-
-    <div class="container">
-
-        <div class="row align-items-center g-5">
-
-            <div class="col-lg-7">
-
-                <span class="section-label">
-                    BAIDEHI SOLAR PV PROJECT
-                </span>
-
-                <h2>
-                    Powering Nepal with Clean Energy
-                </h2>
-
-                <p>
-                    The Baidehi Solar PV Project is a utility-scale,
-                    grid-connected solar power project being developed by
-                    Baidehi Energy Pvt. Ltd. in Chandrapur Municipality,
-                    Rautahat District, Madhesh Province, Nepal.
-                </p>
-
-                <p>
-                    With an installed capacity of <strong>10 MW AC
-                    (12 MWp DC)</strong>, the project will utilize advanced
-                    photovoltaic technology to deliver renewable electricity
-                    to Nepal's national grid through the Chandrapur
-                    132/33 kV Substation.
-                </p>
-
-                <p>
-                    The project site has been identified as technically
-                    suitable due to its favorable solar resource, accessible
-                    location and efficient grid connectivity.
-                </p>
-
-            </div>
-
-            <div class="col-lg-5">
-
-                <div class="project-image-placeholder">
-
-                    <i class="bi bi-sun"></i>
-
-                    <span>
-                        Project Image
-                    </span>
-
+        <div class="project-showcase__grid">
+            <div class="project-showcase__copy">
+                <span class="section-label">OUR FLAGSHIP DEVELOPMENT</span>
+                <h1>Baidehi Solar PV Project</h1>
+                <p class="project-showcase__lead">A utility-scale solar development built to bring reliable, clean electricity to Nepal's national grid.</p>
+                <p>Located in Chandrapur Municipality, Rautahat District, Madhesh Province, the project is positioned close to the Chandrapur 132/33 kV Substation for efficient grid integration.</p>
+                <p>With an installed capacity of <strong>10 MW AC (12 MWp DC)</strong>, Baidehi Solar PV will generate approximately <strong>17.4 million kWh</strong> of renewable electricity each year.</p>
+                <div class="project-showcase__details">
+                    <div><i class="bi bi-geo-alt"></i><span>Location<strong>Chandrapur, Rautahat</strong></span></div>
+                    <div><i class="bi bi-diagram-3"></i><span>Grid connection<strong>132/33 kV Substation</strong></span></div>
                 </div>
-
+                <a href="#project-overview" class="btn btn-project">View full project details <i class="bi bi-arrow-down ms-2"></i></a>
             </div>
-
+            {% if projectImage %}
+            <div class="project-showcase__image">
+                <img src="{{ projectImage.imageUrl }}" alt="{{ projectImage.title }}">
+                <div class="project-showcase__caption"><i class="bi bi-sun-fill"></i><span>Grid-connected<br><strong>Solar Power</strong></span></div>
+            </div>
+            {% else %}
+            <div class="project-showcase__art" role="img" aria-label="Solar panels beneath a clear sky">
+                <div class="project-showcase__sun"></div>
+                <div class="project-showcase__cloud project-showcase__cloud--one"></div>
+                <div class="project-showcase__cloud project-showcase__cloud--two"></div>
+                <div class="project-showcase__horizon"></div>
+                <div class="project-showcase__panels"></div>
+                <div class="project-showcase__caption"><i class="bi bi-sun-fill"></i><span>Grid-connected<br><strong>Solar Power</strong></span></div>
+            </div>
+            {% endif %}
         </div>
-
     </div>
-
 </section>
 
 
@@ -143,7 +100,7 @@
 
 <!-- PROJECT OVERVIEW -->
 
-<section class="project-overview py-5">
+<section class="project-overview py-5" id="project-overview">
 
     <div class="container">
 

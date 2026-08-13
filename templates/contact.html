@@ -181,7 +181,7 @@
 
                     <form method="POST" action="">
 
-                        {% csrf_token %}
+                        <input type="hidden" name="_csrf" value="{{ csrfToken }}">
 
                         <div class="row g-3">
 
@@ -220,6 +220,7 @@
                                     name="company"
                                     class="form-control"
                                     placeholder="Company name"
+                                    required
                                 >
 
                             </div>
@@ -259,6 +260,7 @@
                                     name="phone"
                                     class="form-control"
                                     placeholder="Phone number"
+                                    required
                                 >
 
                             </div>
@@ -395,7 +397,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     var map = L.map("baidehi-map").setView(
-        [27.1183, 85.3747],
+        [27.127831, 85.389214],
         15
     );
 
@@ -410,15 +412,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     var marker = L.marker(
-        [27.138611, 85.412133]
+        [27.127831, 85.389214]
     ).addTo(map);
 
 
     marker.bindPopup(
         "<b>Baidehi Energy Pvt. Ltd.</b><br>" +
-        "10 MW AC Solar PV Project<br>" +
-        "Chandrapur Municipality<br>" +
-        "Rautahat, Nepal"
+        "27.127831, 85.389214<br>" +
+        '<a href="https://www.google.com/maps/search/27.127831,+85.389214" target="_blank" rel="noopener">Open in Google Maps</a>'
     ).openPopup();
 
 });

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin · Baidehi Energy</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+  <style>
+    :root { --ink:#17301d; --green:#23713f; --muted:#6b786e; --line:#e7ece8; --canvas:#f6f8f6; }
+    body { background:var(--canvas); color:var(--ink); font-family:Inter,ui-sans-serif,system-ui,sans-serif; }
+    .admin-shell { min-height:100vh; display:grid; grid-template-columns:244px minmax(0,1fr); }
+    .sidebar { background:var(--ink); color:#dfe9e1; padding:28px 16px; display:flex; flex-direction:column; }
+    .brand { color:#fff; display:flex; align-items:center; gap:10px; font-weight:700; text-decoration:none; padding:0 10px 28px; }
+    .brand img { width:34px; height:34px; object-fit:contain; }
+    .brand small { display:block; color:#9eb4a3; font-size:11px; font-weight:600; letter-spacing:.09em; text-transform:uppercase; }
+    .side-link { color:#c4d3c8; border-radius:10px; text-decoration:none; display:flex; align-items:center; gap:12px; padding:11px 12px; margin:3px 0; font-size:14px; font-weight:600; }
+    .side-link:hover,.side-link.active { color:#fff; background:rgba(255,255,255,.12); }
+    .side-link i { font-size:17px; }
+    .sidebar-footer { margin-top:auto; padding:20px 10px 0; border-top:1px solid rgba(255,255,255,.12); }
+    .logout { border:0; background:transparent; color:#c4d3c8; padding:0; font-size:14px; }
+    .logout:hover { color:#fff; }
+    .admin-content { max-width:1180px; width:100%; padding:40px; margin:0 auto; }
+    .page-eyebrow { color:var(--green); font-size:12px; letter-spacing:.1em; font-weight:800; text-transform:uppercase; }
+    .page-title { font-size:30px; letter-spacing:-.04em; font-weight:750; margin:5px 0 0; }
+    .admin-card { border:1px solid var(--line); border-radius:16px; background:#fff; box-shadow:0 8px 24px rgba(20,48,29,.035); }
+    .btn-admin { background:var(--green); border-color:var(--green); border-radius:9px; font-weight:700; padding:.6rem .9rem; }
+    .btn-admin:hover { background:#195b31; border-color:#195b31; }
+    .btn-quiet { border-color:var(--line); border-radius:9px; color:var(--ink); font-weight:700; }
+    .table > :not(caption) > * > * { padding:16px 18px; border-color:var(--line); }
+    .table thead th { color:var(--muted); font-size:11px; letter-spacing:.08em; text-transform:uppercase; }
+    .form-control,.form-select { border-color:#dbe4dd; border-radius:9px; padding:.67rem .8rem; }
+    .form-control:focus,.form-select:focus { border-color:#75ad85; box-shadow:0 0 0 .2rem rgba(35,113,63,.1); }
+    .form-label { color:var(--ink); font-weight:700; font-size:14px; }
+    .stat-card { color:var(--ink); text-decoration:none; transition:transform .18s,box-shadow .18s; }
+    .stat-card:hover { transform:translateY(-3px); box-shadow:0 12px 30px rgba(20,48,29,.09); }
+    .stat-icon { height:42px; width:42px; display:grid; place-items:center; color:var(--green); background:#eaf4ed; border-radius:12px; font-size:19px; }
+    .login-shell { min-height:100vh; display:grid; place-items:center; padding:20px; }
+    .login-card { width:min(100%,430px); }
+    @media (max-width:767px) { .admin-shell { display:block; } .sidebar { min-height:auto; padding:14px; } .brand { padding-bottom:12px; } .side-nav { display:flex; overflow:auto; gap:4px; } .side-link { white-space:nowrap; } .sidebar-footer { display:none; } .admin-content { padding:28px 18px; } }
+  </style>
+</head>
+<body>
+<div class="{% if isAdmin %}admin-shell{% else %}login-shell{% endif %}">
+{% if isAdmin %}<aside class="sidebar"><a class="brand" href="/admin"><img src="/static/images/logo.png" alt="Baidehi Energy"><span>Baidehi Energy<small>Content studio</small></span></a><nav class="side-nav"><a class="side-link {% if adminSection == 'dashboard' %}active{% endif %}" href="/admin"><i class="bi bi-grid-1x2"></i>Overview</a><a class="side-link {% if adminSection == 'team' %}active{% endif %}" href="/admin/team"><i class="bi bi-people"></i>Team</a><a class="side-link {% if adminSection == 'gallery' %}active{% endif %}" href="/admin/gallery"><i class="bi bi-images"></i>Gallery</a><a class="side-link {% if adminSection == 'news' %}active{% endif %}" href="/admin/news"><i class="bi bi-newspaper"></i>News & notices</a><a class="side-link {% if adminSection == 'messages' %}active{% endif %}" href="/admin/messages"><i class="bi bi-inbox"></i>Messages</a></nav><div class="sidebar-footer"><form method="post" action="/admin/logout"><input type="hidden" name="_csrf" value="{{ csrfToken }}"><button class="logout"><i class="bi bi-box-arrow-left me-2"></i>Sign out</button></form></div></aside>{% endif %}
+<main class="{% if isAdmin %}admin-content{% else %}admin-card login-card p-4 p-md-5{% endif %}">{% block content %}{% endblock %}</main>
+</div>
+</body></html>

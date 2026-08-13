@@ -136,155 +136,30 @@
         </div>
 
 
-        <!-- =================================================
-             CHAIRMAN
-             ================================================= -->
-
-        {% for member in members %}
-
-            {% if member.position|lower == "chairman" %}
-
-            <div class="chairman-profile">
-
-                <div class="chairman-profile-photo">
-
-                    {% if member.photo %}
-
-                        <img
-                            src="{{ member.photo.url }}"
-                            alt="{{ member.name }}"
-                        >
-
-                    {% else %}
-
-                        <div class="team-photo-placeholder">
-                            <i class="bi bi-person"></i>
-                        </div>
-
-                    {% endif %}
-
-                </div>
-
-
-                <div class="chairman-profile-content">
-
-                    <span class="team-category-label">
-                        LEADERSHIP
-                    </span>
-
-                    <h3>
-                        {{ member.name }}
-                    </h3>
-
-                    <h5>
-                        {{ member.position }}
-                    </h5>
-
-                    {% if member.bio %}
-
-                        <p>
-                            {{ member.bio }}
-                        </p>
-
-                    {% else %}
-
-                        <p>
-                            Providing leadership and strategic direction
-                            for Baidehi Energy's renewable energy
-                            development and long-term growth.
-                        </p>
-
-                    {% endif %}
-
-                </div>
-
-            </div>
-
-            {% endif %}
-
-        {% endfor %}
-
-
-        <!-- =================================================
-             OTHER TEAM MEMBERS
-             ================================================= -->
-
-        <div class="team-section-subheading">
-
-            <span class="section-label">
-                OUR PROFESSIONALS
-            </span>
-
-            <h3>
-                Leadership &amp; Professional Team
-            </h3>
-
-        </div>
-
-
-        <div class="about-team-grid">
-
-            {% for member in members %}
-
-                {% if member.position|lower != "chairman" %}
-
-                <div class="about-team-card">
-
-                    <!-- PHOTO -->
-
+        {% for category in category_list %}
+        <div class="about-team-category">
+            <h3>{{ category.grouper }}</h3>
+            <div class="about-team-grid">
+                {% for member in category.list %}
+                <article class="about-team-card">
                     <div class="about-team-photo">
-
                         {% if member.photo %}
-
-                            <img
-                                src="{{ member.photo.url }}"
-                                alt="{{ member.name }}"
-                            >
-
+                        <img src="{{ member.photoUrl }}" alt="{{ member.name }}">
                         {% else %}
-
-                            <div class="about-team-placeholder">
-                                <i class="bi bi-person"></i>
-                            </div>
-
+                        <div class="about-team-placeholder" aria-hidden="true"><i class="bi bi-person"></i></div>
                         {% endif %}
-
                     </div>
-
-
-                    <!-- INFORMATION -->
-
                     <div class="about-team-info">
-
-                        <span class="about-team-category">
-                            {{ member.get_category_display }}
-                        </span>
-
-                        <h3>
-                            {{ member.name }}
-                        </h3>
-
-                        <p>
-                            {{ member.position }}
-                        </p>
-
-                        {% if member.bio %}
-
-                            <div class="about-team-bio">
-                                {{ member.bio }}
-                            </div>
-
-                        {% endif %}
-
+                        <h4>{{ member.name }}</h4>
+                        <p>{{ member.position }}</p>
                     </div>
-
-                </div>
-
-                {% endif %}
-
-            {% endfor %}
-
+                </article>
+                {% endfor %}
+            </div>
         </div>
+        {% else %}
+        <div class="about-team-empty">Our team information will be available soon.</div>
+        {% endfor %}
 
     </div>
 
@@ -330,20 +205,18 @@
 
 
             <div class="col-lg-6">
-
-                <div class="about-project-placeholder">
-
-                    <i class="bi bi-sun"></i>
-
-                    <h4>
-                        Solar Project
-                    </h4>
-
-                    <p>
-                        Project photographs will be added here.
-                    </p>
-
+                {% if aboutProjectImage %}
+                <div class="about-project-image">
+                    <img src="{{ aboutProjectImage.imageUrl }}" alt="{{ aboutProjectImage.title }}">
                 </div>
+                {% else %}
+                <div class="dedicated-visual dedicated-visual--about-project" role="img" aria-label="Illustration of a solar project connected to Nepal's grid">
+                    <div class="dedicated-visual__sun"></div>
+                    <div class="dedicated-visual__hills"></div>
+                    <div class="dedicated-visual__panels"></div>
+                    <div class="dedicated-visual__grid"><i class="bi bi-diagram-3-fill"></i> Grid-connected solar</div>
+                </div>
+                {% endif %}
 
             </div>
 

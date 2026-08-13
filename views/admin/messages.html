@@ -1,0 +1,4 @@
+{% extends "admin/layout.html" %}
+{% block content %}
+<div class="mb-4"><div class="page-eyebrow">Inbox</div><h1 class="page-title">Contact messages</h1></div><div class="admin-card overflow-hidden"><div class="list-group list-group-flush">{% for item in messages %}<article class="list-group-item border-0 border-bottom p-4"><div class="d-flex justify-content-between gap-3"><div><h2 class="h6 mb-1">{{ item.subject }}</h2><div class="text-secondary small">{{ item.name }} · <a href="mailto:{{ item.email }}">{{ item.email }}</a>{% if item.phone %} · {{ item.phone }}{% endif %}</div></div><small class="text-secondary text-nowrap">{{ item.createdAt }}</small></div><p class="mb-0 mt-3">{{ item.message }}</p></article>{% else %}<div class="p-5 text-center text-secondary">No messages yet.</div>{% endfor %}</div></div>
+{% endblock %}
