@@ -55,7 +55,7 @@ async function main() {
     }
     if (page === 'admin/messages.html') {
       assert.match(html, /Mark as read/, 'Admin inbox should support marking a message as read');
-      assert.match(html, /\/admin\/messages\/\d+\/delete/, 'Admin inbox should support deleting a message');
+      assert.match(html, /\/naren\/messages\/\d+\/delete/, 'Admin inbox should support deleting a message');
     }
   }
 

@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 
 function requireAdmin(req, res, next) {
   if (req.session && req.session.isAdmin) return next();
-  return res.redirect('/admin/login');
+  return res.redirect('/naren/login');
 }
 
 async function login(req, res) {
@@ -12,10 +12,10 @@ async function login(req, res) {
   const passwordMatches = passwordHash && password ? await bcrypt.compare(password, passwordHash) : false;
   if (!usernameMatches || !passwordMatches) {
     req.flash('error', 'Invalid username or password.');
-    return res.redirect('/admin/login');
+    return res.redirect('/naren/login');
   }
   req.session.isAdmin = true;
-  return res.redirect('/admin');
+  return res.redirect('/naren');
 }
 
 module.exports = { requireAdmin, login };

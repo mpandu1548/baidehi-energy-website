@@ -26,7 +26,7 @@ function valuesFrom(req, config) {
 }
 
 router.route('/login').get((req, res) => res.render('admin/login.html', { page: 'admin' })).post(login);
-router.post('/logout', requireAdmin, (req, res) => req.session.destroy(() => res.redirect('/admin/login')));
+router.post('/logout', requireAdmin, (req, res) => req.session.destroy(() => res.redirect('/naren/login')));
 router.get('/', requireAdmin, async (req, res, next) => {
   try {
     const [team, gallery, news, messages] = await Promise.all([TeamMember.count(), GalleryImage.count(), NewsNotice.count(), ContactMessage.count({ where: { isRead: false } })]);
@@ -42,7 +42,7 @@ router.post('/messages/:id/read', requireAdmin, async (req, res, next) => {
     if (!item) return res.sendStatus(404);
     await item.update({ isRead: !item.isRead });
     req.flash('success', item.isRead ? 'Message marked as read.' : 'Message marked as unread.');
-    return res.redirect('/admin/messages');
+    return res.redirect('/naren/messages');
   } catch (error) { return next(error); }
 });
 router.post('/messages/:id/delete', requireAdmin, async (req, res, next) => {
@@ -50,14 +50,14 @@ router.post('/messages/:id/delete', requireAdmin, async (req, res, next) => {
     const removed = await ContactMessage.destroy({ where: { id: req.params.id } });
     if (!removed) return res.sendStatus(404);
     req.flash('success', 'Message deleted.');
-    return res.redirect('/admin/messages');
+    return res.redirect('/naren/messages');
   } catch (error) { return next(error); }
 });
 router.get('/gallery/batch', requireAdmin, (req, res) => res.render('admin/gallery-batch.html', { page: 'admin', adminSection: 'gallery' }));
 router.post('/gallery/batch', requireAdmin, uploadManyTo('gallery'), validateMultipartCsrf, async (req, res, next) => {
   if (!req.files || !req.files.length) {
     req.flash('error', 'Choose at least one image to upload.');
-    return res.redirect('/admin/gallery/batch');
+    return res.redirect('/naren/gallery/batch');
   }
   try {
     const lastOrder = await GalleryImage.max('order') || 0;
@@ -69,7 +69,7 @@ router.post('/gallery/batch', requireAdmin, uploadManyTo('gallery'), validateMul
       isActive: true,
     })));
     req.flash('success', `${req.files.length} gallery image${req.files.length === 1 ? '' : 's'} uploaded.`);
-    return res.redirect('/admin/gallery');
+    return res.redirect('/naren/gallery');
   } catch (error) { return next(error); }
 });
 router.get('/:name/new', requireAdmin, (req, res) => {
@@ -83,7 +83,7 @@ router.post('/:name', requireAdmin, (req, res, next) => {
     if (error) return next(error);
     return validateMultipartCsrf(req, res, async (csrfError) => {
       if (csrfError) return next(csrfError);
-    try { await config.model.create(valuesFrom(req, config)); return res.redirect(`/admin/${req.params.name}`); } catch (err) { return next(err); }
+    try { await config.model.create(valuesFrom(req, config)); return res.redirect(`/naren/${req.params.name}`); } catch (err) { return next(err); }
     });
   });
 });
@@ -98,13 +98,13 @@ router.post('/:name/:id', requireAdmin, (req, res, next) => {
     if (error) return next(error);
     return validateMultipartCsrf(req, res, async (csrfError) => {
       if (csrfError) return next(csrfError);
-    try { const item = await config.model.findByPk(req.params.id); if (!item) return res.sendStatus(404); await item.update(valuesFrom(req, config)); return res.redirect(`/admin/${req.params.name}`); } catch (err) { return next(err); }
+    try { const item = await config.model.findByPk(req.params.id); if (!item) return res.sendStatus(404); await item.update(valuesFrom(req, config)); return res.redirect(`/naren/${req.params.name}`); } catch (err) { return next(err); }
     });
   });
 });
 router.post('/:name/:id/delete', requireAdmin, async (req, res, next) => {
   const config = resource(req.params.name); if (!config) return res.sendStatus(404);
-  try { await config.model.destroy({ where: { id: req.params.id } }); return res.redirect(`/admin/${req.params.name}`); } catch (error) { return next(error); }
+  try { await config.model.destroy({ where: { id: req.params.id } }); return res.redirect(`/naren/${req.params.name}`); } catch (error) { return next(error); }
 });
 router.get('/:name', requireAdmin, async (req, res, next) => {
   const config = resource(req.params.name); if (!config) return res.sendStatus(404);

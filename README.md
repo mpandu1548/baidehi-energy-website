@@ -9,7 +9,7 @@ This is the Node.js/Express implementation of the Baidehi Energy website. Its te
 3. Run `npm install`.
 4. Run `npm run dev`, then open `http://localhost:3000`.
 
-The editor area is at `/admin`. It requires `ADMIN_USERNAME` and `ADMIN_PASSWORD_HASH`; it deliberately has no default credentials.
+The editor area is at `/naren`. It requires `ADMIN_USERNAME` and `ADMIN_PASSWORD_HASH`.
 
 ## Preserved source folders
 

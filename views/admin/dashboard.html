@@ -2,9 +2,9 @@
 {% block content %}
 <div class="mb-4"><div class="page-eyebrow">Content studio</div><h1 class="page-title">Good to see you</h1><p class="text-secondary mb-0 mt-2">Manage the website’s people, images, updates, and enquiries.</p></div>
 <div class="row g-3">
-{% for card in [{label:'Team members', count:counts.team, icon:'people', url:'/admin/team'}, {label:'Gallery images', count:counts.gallery, icon:'images', url:'/admin/gallery'}, {label:'News & notices', count:counts.news, icon:'newspaper', url:'/admin/news'}, {label:'New messages', count:counts.messages, icon:'inbox', url:'/admin/messages'}] %}
+{% for card in [{label:'Team members', count:counts.team, icon:'people', url:'/naren/team'}, {label:'Gallery images', count:counts.gallery, icon:'images', url:'/naren/gallery'}, {label:'News & notices', count:counts.news, icon:'newspaper', url:'/naren/news'}, {label:'New messages', count:counts.messages, icon:'inbox', url:'/naren/messages'}] %}
 <div class="col-md-6 col-xl-3"><a class="admin-card stat-card d-block p-3" href="{{ card.url }}"><div class="d-flex justify-content-between align-items-start"><div><div class="text-secondary small">{{ card.label }}</div><strong class="display-6 d-block mt-2">{{ card.count }}</strong></div><div class="stat-icon"><i class="bi bi-{{ card.icon }}"></i></div></div></a></div>
 {% endfor %}
 </div>
-<div class="admin-card p-4 mt-4"><div class="d-flex align-items-center justify-content-between gap-3 flex-wrap"><div><h2 class="h5 mb-1">Gallery shortcuts</h2><p class="text-secondary mb-0">Add one detailed image or upload a collection at once.</p></div><div class="d-flex gap-2"><a class="btn btn-quiet" href="/admin/gallery/new">Add one image</a><a class="btn btn-success btn-admin" href="/admin/gallery/batch"><i class="bi bi-cloud-arrow-up me-1"></i>Batch upload</a></div></div></div>
+<div class="admin-card p-4 mt-4"><div class="d-flex align-items-center justify-content-between gap-3 flex-wrap"><div><h2 class="h5 mb-1">Gallery shortcuts</h2><p class="text-secondary mb-0">Add one detailed image or upload a collection at once.</p></div><div class="d-flex gap-2"><a class="btn btn-quiet" href="/naren/gallery/new">Add one image</a><a class="btn btn-success btn-admin" href="/naren/gallery/batch"><i class="bi bi-cloud-arrow-up me-1"></i>Batch upload</a></div></div></div>
 {% endblock %}

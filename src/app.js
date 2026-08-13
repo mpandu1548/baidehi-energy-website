@@ -51,7 +51,7 @@ app.use((req, res, next) => { res.locals.isAdmin = Boolean(req.session.isAdmin);
 app.get('/healthz', (req, res) => res.status(200).json({ status: 'ok' }));
 app.use('/contact/', rateLimit({ windowMs: 15 * 60 * 1000, limit: 20, standardHeaders: true, legacyHeaders: false }));
 app.use('/', publicRoutes);
-app.use('/admin', adminRoutes);
+app.use('/naren', adminRoutes);
 app.use((req, res) => res.status(404).send('Page not found'));
 app.use((error, req, res, next) => { console.error(error); res.status(error.status || 500).send(error.status ? error.message : 'An unexpected error occurred.'); });
 
