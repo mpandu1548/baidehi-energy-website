@@ -31,7 +31,14 @@ exports.project = async (req, res, next) => {
     return render(res, 'project.html', 'project', { projectImage: galleryImages[6] || galleryImages[0] });
   } catch (error) { return next(error); }
 };
-exports.chairman = (req, res) => render(res, 'chairman.html', 'chairman');
+exports.chairman = async (req, res, next) => {
+  try {
+    // The Chairman's portrait is managed with the team directory, so this page
+    // always uses the same image visitors see in Our Team.
+    const chairman = (await activeMembers()).find((member) => /\bchairman\b/i.test(member.position));
+    return render(res, 'chairman.html', 'chairman', { chairman });
+  } catch (error) { return next(error); }
+};
 exports.gallery = async (req, res, next) => {
   try { return render(res, 'gallery.html', 'gallery', { images: await activeGallery() }); } catch (error) { return next(error); }
 };

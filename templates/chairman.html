@@ -31,16 +31,27 @@
 
             <div class="col-lg-5">
 
-                <div class="chairman-photo">
+                <figure class="chairman-portrait">
 
-                    <!-- Chairman photo will be added later -->
+                    <div class="chairman-photo">
 
-                    <div class="chairman-photo-placeholder">
-                        <i class="bi bi-person"></i>
-                        <span>Chairman's Photo</span>
+                        {% if chairman and chairman.photo %}
+                        <img src="{{ chairman.photoUrl }}" alt="{{ chairman.name }}, Chairman of Baidehi Energy" fetchpriority="high">
+                        {% else %}
+                        <div class="chairman-photo-placeholder" aria-hidden="true">
+                            <i class="bi bi-person"></i>
+                            <span>Chairman's Photo</span>
+                        </div>
+                        {% endif %}
+
                     </div>
 
-                </div>
+                    <figcaption class="chairman-portrait-caption">
+                        <strong>{{ chairman.name if chairman else 'Gopal Ghimire' }}</strong>
+                        <span>{{ chairman.position if chairman else 'Chairman' }}</span>
+                    </figcaption>
+
+                </figure>
 
             </div>
 

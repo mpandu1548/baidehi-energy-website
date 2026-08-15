@@ -854,6 +854,39 @@ a {
     line-height: 1.5;
 }
 
+.chairman-message-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 14px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: #145a24;
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-decoration: none;
+    line-height: 1.2;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.chairman-message-button:hover,
+.chairman-message-button:focus-visible {
+    background: #c78300;
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+.chairman-message-button i {
+    transition: transform 0.2s ease;
+}
+
+.chairman-message-button:hover i,
+.chairman-message-button:focus-visible i {
+    transform: translateX(3px);
+}
+
 .team-empty {
     padding: 80px 20px;
 }
@@ -1223,6 +1256,47 @@ a {
     font-size: 15px;
 }
 
+.chairman-section .chairman-portrait {
+    width: min(100%, 280px);
+    margin: 0 auto;
+}
+
+.chairman-section .chairman-photo {
+    width: 100%;
+    height: 310px;
+    border: 1px solid #e0e8e1;
+    box-shadow: 0 10px 24px rgba(20, 90, 36, 0.1);
+}
+
+.chairman-section .chairman-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center bottom;
+}
+
+.chairman-portrait-caption {
+    padding-top: 14px;
+    text-align: center;
+}
+
+.chairman-portrait-caption strong,
+.chairman-portrait-caption span {
+    display: block;
+}
+
+.chairman-portrait-caption strong {
+    color: #17301d;
+    font-size: 1.05rem;
+}
+
+.chairman-portrait-caption span {
+    margin-top: 3px;
+    color: #c78300;
+    font-size: 0.86rem;
+    font-weight: 600;
+}
+
 .chairman-title {
     color: #17301d;
     font-size: 42px;
@@ -1257,8 +1331,8 @@ a {
 
 @media (max-width: 991px) {
 
-    .chairman-photo {
-        height: 450px;
+    .chairman-section .chairman-photo {
+        height: 300px;
     }
 
     .chairman-title {

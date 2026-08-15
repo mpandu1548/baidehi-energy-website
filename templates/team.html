@@ -95,6 +95,12 @@
                             <small>{{ member.bio }}</small>
                             {% endif %}
 
+                            {% if member.position | lower == 'chairman' %}
+                            <a class="chairman-message-button" href="/chairman/" aria-label="Read {{ member.name }}'s message">
+                                Chairman's Message <i class="bi bi-arrow-right" aria-hidden="true"></i>
+                            </a>
+                            {% endif %}
+
                         </div>
 
                     </div>

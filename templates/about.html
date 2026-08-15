@@ -152,6 +152,11 @@
                     <div class="about-team-info">
                         <h4>{{ member.name }}</h4>
                         <p>{{ member.position }}</p>
+                        {% if member.position | lower == 'chairman' %}
+                        <a class="chairman-message-button" href="/chairman/" aria-label="Read {{ member.name }}'s message">
+                            Chairman's Message <i class="bi bi-arrow-right" aria-hidden="true"></i>
+                        </a>
+                        {% endif %}
                     </div>
                 </article>
                 {% endfor %}
