@@ -17,4 +17,5 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            echo "Connected to cPanel!"
+            cd /home1/baidehie/baidehie-energy
+            git pull origin main
