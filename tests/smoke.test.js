@@ -71,6 +71,9 @@ async function main() {
   acceptedRequest.body._csrf = acceptedRequest.session.csrfToken;
   assert.equal(await applyCsrf(acceptedRequest, acceptedResponse), undefined, 'Matching CSRF token should be accepted');
 
+  const requestWithRotatedSession = csrfRequest({ _csrf: acceptedRequest.session.csrfToken });
+  assert.equal(await applyCsrf(requestWithRotatedSession, csrfResponse()), undefined, 'A signed token should survive a session-store change');
+
   const multipartRequest = csrfRequest();
   multipartRequest.is = (type) => type === 'multipart/form-data';
   assert.equal(await applyCsrf(multipartRequest, csrfResponse()), undefined, 'Multipart requests should wait for Multer to parse their fields');

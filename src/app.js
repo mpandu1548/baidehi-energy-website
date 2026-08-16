@@ -13,6 +13,8 @@ const adminRoutes = require('./routes/admin.routes');
 
 const app = express();
 if (process.env.NODE_ENV === 'production') app.set('trust proxy', 1);
+const sessionSecret = process.env.SESSION_SECRET || 'development-only-change-this';
+app.set('session secret', sessionSecret);
 const viewsPath = path.join(process.cwd(), 'templates');
 const env = nunjucks.configure([viewsPath, path.join(process.cwd(), 'views')], { autoescape: true, express: app, noCache: process.env.NODE_ENV === 'development' });
 env.addFilter('date', (value, format) => {
@@ -31,7 +33,7 @@ app.use(express.static(path.join(process.cwd(), 'static')));
 app.use('/static', express.static(path.join(process.cwd(), 'static')));
 app.use('/media', express.static(path.join(process.cwd(), 'media')));
 app.use(session({
-  secret: process.env.SESSION_SECRET || 'development-only-change-this',
+  secret: sessionSecret,
   resave: false,
   saveUninitialized: false,
   cookie: {
