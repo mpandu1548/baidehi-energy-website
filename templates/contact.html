@@ -361,70 +361,20 @@
 
         <div class="map-container">
 
-            <div id="baidehi-map"></div>
+            <iframe
+                id="baidehi-map"
+                title="Baidehi Energy location"
+                src="https://www.google.com/maps?q=27.127831,85.389214&z=15&output=embed"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                allowfullscreen
+            ></iframe>
 
         </div>
 
     </div>
 
 </section>
-
-
-<!-- =========================================
-     LEAFLET MAP
-========================================= -->
-
-<link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-/>
-
-
-<script
-    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
-</script>
-
-
-<script>
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    var mapElement = document.getElementById("baidehi-map");
-
-    if (!mapElement) {
-        return;
-    }
-
-
-    var map = L.map("baidehi-map").setView(
-        [27.127831, 85.389214],
-        15
-    );
-
-
-    L.tileLayer(
-        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-        {
-            maxZoom: 19,
-            attribution: "© OpenStreetMap Contributors"
-        }
-    ).addTo(map);
-
-
-    var marker = L.marker(
-        [27.127831, 85.389214]
-    ).addTo(map);
-
-
-    marker.bindPopup(
-        "<b>Baidehi Energy Pvt. Ltd.</b><br>" +
-        "27.127831, 85.389214<br>" +
-        '<a href="https://www.google.com/maps/search/27.127831,+85.389214" target="_blank" rel="noopener">Open in Google Maps</a>'
-    ).openPopup();
-
-});
-
-</script>
 
 
 {% endblock %}

@@ -54,6 +54,8 @@ async function main() {
     if (page === 'contact.html') {
       assert.match(html, /name="company"[\s\S]*?required/, 'Company should be required');
       assert.match(html, /name="phone"[\s\S]*?required/, 'Phone should be required');
+      assert.match(html, /google\.com\/maps\?q=27\.127831,85\.389214/, 'Contact should embed the configured Google Maps location');
+      assert.doesNotMatch(html, /tile\.openstreetmap\.org/, 'Contact should not request OpenStreetMap volunteer tiles');
     }
     if (page === 'admin/messages.html') {
       assert.match(html, /Mark as read/, 'Admin inbox should support marking a message as read');
