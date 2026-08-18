@@ -18,4 +18,8 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             cd /home1/baidehie/baidehie-energy
+            previous_commit=$(git rev-parse HEAD)
             git pull origin main
+            if ! git diff --quiet "$previous_commit" HEAD -- src; then
+              cloudlinux-selector restart --json --interpreter nodejs --user baidehie --app-root baidehie-energy/
+            fi
