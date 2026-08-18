@@ -1,5 +1,6 @@
 const { activeMembers, activeGallery, publishedNews, publishedNewsById, categoryLabels, categoryOrder } = require('../services/content');
 const { ContactMessage } = require('../models');
+const contactEmail = require('../services/contact-email');
 
 function render(res, view, page, data = {}) {
   return res.render(view, { page, ...data });
@@ -73,7 +74,14 @@ exports.submitContact = async (req, res, next) => {
     return res.status(422).render('contact.html', { page: 'contact', message_sent: false, form: req.body });
   }
   try {
-    await ContactMessage.create({ name: req.body.name.trim(), company: String(req.body.company || '').trim(), email: req.body.email.trim(), phone: String(req.body.phone || '').trim(), subject: req.body.subject.trim(), message: req.body.message.trim() });
+    const contact = await ContactMessage.create({ name: req.body.name.trim(), company: String(req.body.company || '').trim(), email: req.body.email.trim(), phone: String(req.body.phone || '').trim(), subject: req.body.subject.trim(), message: req.body.message.trim() });
+    try {
+      await contactEmail.sendContactEmail(contact);
+    } catch (emailError) {
+      console.error('Unable to send contact-form email notification:', emailError);
+      req.flash('error', 'Your message was saved, but we could not send the email notification. Please try again later.');
+      return res.redirect('/contact/');
+    }
     return res.redirect('/contact/?sent=1');
   } catch (error) { return next(error); }
 };

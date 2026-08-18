@@ -10,6 +10,8 @@ fs.rmSync(process.env.DATABASE_PATH, { force: true });
 const { app, initialiseDatabase } = require('../src/app');
 const { csrfProtection, validateMultipartCsrf } = require('../src/middleware/csrf');
 const contactController = require('../src/controllers/public.controller');
+const contactEmail = require('../src/services/contact-email');
+const nodemailer = require('nodemailer');
 const { TeamMember, GalleryImage, NewsNotice, ContactMessage, sequelize } = require('../src/models');
 
 function render(view, data) {
@@ -83,9 +85,36 @@ async function main() {
   const redirects = [];
   const submission = { body: { name: 'Test Sender', company: 'Test Company', email: 'sender@example.com', phone: '+977-9800000000', subject: 'Test enquiry', message: 'Please contact me.' }, flash() {} };
   const response = { redirect: (location) => redirects.push(location), status() { return this; }, render() { throw new Error('Expected valid submission to redirect'); } };
+  const originalSendContactEmail = contactEmail.sendContactEmail;
+  let emailedContact;
+  contactEmail.sendContactEmail = async (contact) => { emailedContact = contact; };
   await contactController.submitContact(submission, response, (error) => { throw error; });
+  contactEmail.sendContactEmail = originalSendContactEmail;
   assert.deepEqual(redirects, ['/contact/?sent=1']);
   assert.equal(await ContactMessage.count(), 2);
+  assert.equal(emailedContact.email, submission.body.email, 'Contact form should email the sender details');
+
+  const originalCreateTransport = nodemailer.createTransport;
+  const originalEmailEnvironment = Object.fromEntries(['SMTP_HOST', 'SMTP_PORT', 'SMTP_SECURE', 'SMTP_USER', 'SMTP_PASS', 'CONTACT_EMAIL_FROM', 'CONTACT_EMAIL_TO'].map((key) => [key, process.env[key]]));
+  let transportOptions;
+  let outboundEmail;
+  nodemailer.createTransport = (options) => {
+    transportOptions = options;
+    return { sendMail: async (email) => { outboundEmail = email; } };
+  };
+  Object.assign(process.env, {
+    SMTP_HOST: 'smtp.example.com', SMTP_PORT: '587', SMTP_SECURE: 'false', SMTP_USER: 'smtp-user', SMTP_PASS: 'smtp-pass', CONTACT_EMAIL_FROM: 'website@example.com', CONTACT_EMAIL_TO: 'inbox@example.com',
+  });
+  await contactEmail.sendContactEmail(emailedContact);
+  nodemailer.createTransport = originalCreateTransport;
+  for (const [key, setting] of Object.entries(originalEmailEnvironment)) {
+    if (setting === undefined) delete process.env[key]; else process.env[key] = setting;
+  }
+  assert.deepEqual(transportOptions, { host: 'smtp.example.com', port: 587, secure: false, auth: { user: 'smtp-user', pass: 'smtp-pass' } }, 'SMTP transport should use environment settings');
+  assert.equal(outboundEmail.from, 'website@example.com');
+  assert.equal(outboundEmail.to, 'inbox@example.com');
+  assert.equal(outboundEmail.replyTo, submission.body.email);
+  assert.match(outboundEmail.subject, /Test enquiry/);
 
   let missingFieldStatus;
   const incompleteSubmission = { body: { ...submission.body, phone: '' }, flash() {} };

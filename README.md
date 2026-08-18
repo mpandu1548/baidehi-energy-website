@@ -11,6 +11,8 @@ This is the Node.js/Express implementation of the Baidehi Energy website. Its te
 
 The editor area is at `/naren`. It requires `ADMIN_USERNAME` and `ADMIN_PASSWORD_HASH`.
 
+To email new contact-form enquiries, configure `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, `SMTP_PASS`, `CONTACT_EMAIL_FROM`, and `CONTACT_EMAIL_TO` in `.env`. See [DEPLOYMENT.md](DEPLOYMENT.md) for the settings and TLS guidance.
+
 ## Preserved source folders
 
 - `templates/` is the public template source and is rendered by Nunjucks under Express.

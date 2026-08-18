@@ -14,7 +14,17 @@ SESSION_SECRET=<a-long-random-secret>
 ADMIN_USERNAME=<editor-login-name>
 ADMIN_PASSWORD_HASH=<bcrypt-hash>
 UPLOAD_MAX_FILE_SIZE=5242880
+# SMTP notification for new contact-form submissions
+SMTP_HOST=smtp.example.com
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_USER=<smtp-username>
+SMTP_PASS=<smtp-password>
+CONTACT_EMAIL_FROM=website@example.com
+CONTACT_EMAIL_TO=recipient@example.com
 ```
+
+`CONTACT_EMAIL_FROM` is the sender address and `CONTACT_EMAIL_TO` is the address that receives enquiries. Set `SMTP_SECURE=true` for implicit TLS (normally port 465); leave it `false` for STARTTLS (normally port 587). `SMTP_USER` and `SMTP_PASS` may be omitted only for an SMTP server that does not require authentication. If the SMTP settings are omitted, enquiries remain available in the admin inbox but no notification email is sent.
 
 Generate the password hash locally:
 
